@@ -8,9 +8,9 @@ import Link from "next/link";
 
 export default function BoardCardList() {
   const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
 
-  const { data, isLoading, status, fetchNextPage } = useInfiniteQuery({
+  const { data, isLoading, status, fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ["post", page],
 
     queryFn: async ({ pageParam = 0 }) => {
@@ -25,13 +25,11 @@ export default function BoardCardList() {
 
     initialPageParam: 0,
   });
+  console.log("data: ", data);
 
   useEffect(() => {
     function handleScroll() {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-      console.log("scrollHeight: ", scrollHeight);
-      console.log("clientHeight: ", clientHeight);
-      console.log("scrollTop: ", scrollTop);
       if (scrollTop + clientHeight + 10 >= scrollHeight) {
         fetchNextPage();
       }
@@ -48,6 +46,7 @@ export default function BoardCardList() {
   return (
     <div>
       <select
+        defaultValue={10}
         onChange={(e) => {
           setLimit(Number(e.target.value));
         }}
@@ -74,6 +73,10 @@ export default function BoardCardList() {
           );
         });
       })}
+      {isFetching && <div>Loading..</div>}
+      {data?.pages[data?.pages.length - 1][1].length == 0 && (
+        <div className="mb-2 font-bold text-center">End Of Post</div>
+      )}
     </div>
   );
 }

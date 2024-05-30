@@ -53,7 +53,7 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
           setShowModal(false);
         }}
       >
-        <div className=" h-5/6 mt-14 mr-4 ml-4 flex">
+        <div className=" h-5/6 mt-14 mr-4 ml-4 flex z-50">
           <div className="m-auto">
             <Input.Label id="email" labelName="email" />
             <Input.Label id="nickname" labelName="nickname" />

@@ -20,15 +20,19 @@ export function CommentInput({ postId }: { postId: number }) {
     },
   });
   return (
-    <div className={"min-w-[60%] m-auto justify-center flex max-w-[60%] h-20"}>
+    <div
+      className={
+        "min-w-[60%] m-auto justify-center flex max-w-[60%] h-20 rounded-md overflow-hidden border border-gray-500"
+      }
+    >
       <textarea
         onChange={(e) => {
           setText(e.target.value);
         }}
         value={text}
-        className="max-w-[90%] w-full border-gray-400 border"
+        className="max-w-[90%] w-full "
       />
-      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border-gray-400 border">
+      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border">
         INPUT
       </ButtonFrame>
     </div>

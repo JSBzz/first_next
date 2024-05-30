@@ -9,7 +9,7 @@ export async function SignUpRequest(body: {
 }) {
   try {
     const fetchData: Response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/member/sign-up`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/member/sign-up`,
       {
         method: "POST",
         body: JSON.stringify(body),

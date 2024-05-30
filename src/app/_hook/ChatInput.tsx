@@ -28,7 +28,7 @@ const ChatInput = ({ scrollRef }: any) => {
     setMessage("");
   }
   return (
-    <div className="bg-gray-100">
+    <div className="bg-white z-50">
       <form onSubmit={OnSubmit} ref={formRef}>
         <div className="h-14 top grid grid-cols-[70%_30%]">
           <textarea

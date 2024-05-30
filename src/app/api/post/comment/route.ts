@@ -11,7 +11,7 @@ interface RequestBody {
 }
 
 export async function GET(request: Request) {
-  const url = new URL(request.url, "http://localhost:3000"); // Base URL이 필요합니다.
+  const url = new URL(request.url, process.env.NEXT_PUBLIC_BASE_URL);
   const searchParams = new URLSearchParams(url.search);
   const postId = Number(searchParams.get("postId"));
   const response = await prisma.post_comment.findMany({

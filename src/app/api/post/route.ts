@@ -11,14 +11,15 @@ interface RequestBody {
 }
 
 export async function GET(request: Request) {
-  const searchParams = new URLSearchParams(request.url);
+  const url = new URL(request.url, process.env.NEXT_PUBLIC_BASE_URL);
+  const searchParams = new URLSearchParams(url.search);
   const limit = Number(searchParams.get("limit"));
   const lastId = Number(searchParams.get("lastId"));
   const response = await prisma.$transaction([
     prisma.post.count(),
     prisma.post.findMany({
       include: { user: true },
-      take: 4,
+      take: limit,
       skip: lastId ? 1 : 0,
       ...(lastId && { cursor: { id: lastId } }),
     }),

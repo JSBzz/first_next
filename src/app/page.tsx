@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-[calc(100vh-64px)] ">
       <div>
-        <div className="float-right right z-10 mt-20">
+        <div className="fixed right-20 z-50 mt-20 bg-white">
           <Chat />
         </div>
 
