@@ -53,3 +53,44 @@ export async function PostDetailGetRequest(id: number) {
     console.log("err: ", err);
   }
 }
+
+export async function PostRecentGetRequest(id: number) {
+  try {
+    const fetchData: Response = await fetch(`http://localhost:3000/api/post/${id}/recent`, {
+      method: "GET",
+    });
+
+    const post = await fetchData?.json();
+    return post;
+  } catch (err) {
+    console.log("err: ", err);
+  }
+}
+
+export async function CommentPostRequest(postId: number, contents: string, writerId: number) {
+  try {
+    const fetchData: Response = await fetch(`http://localhost:3000/api/post/comment`, {
+      method: "POST",
+      body: JSON.stringify({ postId, contents, writerId }),
+    });
+    const post = await fetchData?.json();
+    return post;
+  } catch (err) {
+    console.log("err: ", err);
+  }
+}
+
+export async function CommentGetRequest(postId: number) {
+  try {
+    const fetchData: Response = await fetch(
+      `http://localhost:3000/api/post/comment?postId=${postId}`,
+      {
+        method: "GET",
+      }
+    );
+    const post = await fetchData?.json();
+    return post;
+  } catch (err) {
+    console.log("err: ", err);
+  }
+}
