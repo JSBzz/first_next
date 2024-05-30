@@ -1,7 +1,7 @@
 export async function PostPostRequest(body: { title: string; contents: string; userId: number }) {
   console.log("body: ", body);
   try {
-    const fetchData: Response = await fetch(`http://localhost:3000/api/post`, {
+    const fetchData: Response = await fetch(`http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, {
       method: "POST",
       body: JSON.stringify(body),
     });
@@ -15,7 +15,7 @@ export async function PostPostRequest(body: { title: string; contents: string; u
 
 export async function PostGetRequest() {
   try {
-    const fetchData: Response = await fetch(`http://localhost:3000/api/post`, {
+    const fetchData: Response = await fetch(`http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, {
       method: "GET",
     });
 
@@ -29,7 +29,7 @@ export async function PostGetRequest() {
 export async function PostGetPerPageRequest(limit: number, lastId: number) {
   try {
     const fetchData: Response = await fetch(
-      `http://localhost:3000/api/post?limit=${limit}&lastId=${lastId}`,
+      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post?limit=${limit}&lastId=${lastId}`,
       {
         method: "GET",
       }
@@ -43,9 +43,12 @@ export async function PostGetPerPageRequest(limit: number, lastId: number) {
 }
 export async function PostDetailGetRequest(id: number) {
   try {
-    const fetchData: Response = await fetch(`http://localhost:3000/api/post/${id}`, {
-      method: "GET",
-    });
+    const fetchData: Response = await fetch(
+      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post/${id}`,
+      {
+        method: "GET",
+      }
+    );
 
     const post = await fetchData?.json();
     return post;
@@ -56,9 +59,12 @@ export async function PostDetailGetRequest(id: number) {
 
 export async function PostRecentGetRequest(id: number) {
   try {
-    const fetchData: Response = await fetch(`http://localhost:3000/api/post/${id}/recent`, {
-      method: "GET",
-    });
+    const fetchData: Response = await fetch(
+      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post/${id}/recent`,
+      {
+        method: "GET",
+      }
+    );
 
     const post = await fetchData?.json();
     return post;
@@ -69,10 +75,13 @@ export async function PostRecentGetRequest(id: number) {
 
 export async function CommentPostRequest(postId: number, contents: string, writerId: number) {
   try {
-    const fetchData: Response = await fetch(`http://localhost:3000/api/post/comment`, {
-      method: "POST",
-      body: JSON.stringify({ postId, contents, writerId }),
-    });
+    const fetchData: Response = await fetch(
+      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post/comment`,
+      {
+        method: "POST",
+        body: JSON.stringify({ postId, contents, writerId }),
+      }
+    );
     const post = await fetchData?.json();
     return post;
   } catch (err) {
@@ -83,7 +92,7 @@ export async function CommentPostRequest(postId: number, contents: string, write
 export async function CommentGetRequest(postId: number) {
   try {
     const fetchData: Response = await fetch(
-      `http://localhost:3000/api/post/comment?postId=${postId}`,
+      `http://${process.env.NEXT_PUBLIC_BASE_URL}/api/post/comment?postId=${postId}`,
       {
         method: "GET",
       }
