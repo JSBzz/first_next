@@ -4,8 +4,7 @@ import ModalFrame from "../atom/ModalFrame";
 import Button from "./Button";
 import Input from "./Input";
 import CustomImage from "./CustomImage";
-import { SignUpRequest } from "@/app/_hook/memberRequest";
-import { useRouter } from "next/navigation";
+import { SignUpRequest } from "@/app/_hook/MemberRequest";
 import { uploadHandler } from "@/app/_utils/UploadHandler";
 
 interface Props {
