@@ -12,7 +12,7 @@ export async function SignUpRequest(body: {
       method: "POST",
       body: JSON.stringify(body),
     });
-
+    //
     const user = await fetchData?.json();
     return user;
   } catch (err) {
