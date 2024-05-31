@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import noImage from "../../styles/images/noImage.jpg";
 import Link from "next/link";
 import CustomImage from "../molecule/CustomImage";
-import Loading from "../../styles/images/Loading.gif";
+import Loading from "../../styles/images/loading.gif";
 
 export default function BoardCardList() {
   const [page, setPage] = useState(0);

@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CommentBlock } from "../molecule/CommentBlock";
 import { CommentInput } from "../molecule/CommentInput";
 import { CommentGetRequest } from "@/app/_hook/PostRequest";
-import CustomImage from "../molecule/CustomImage";
-import Loading from "../../styles/images/Loading.gif";
 
 export default function Comment({ postId }: any) {
   const { data, isLoading } = useQuery({

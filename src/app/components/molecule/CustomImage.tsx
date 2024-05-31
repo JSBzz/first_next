@@ -1,6 +1,6 @@
 import Image from "next/image";
 import guestImage from "../../styles/images/guest.png";
-import Loading from "../../styles/images/Loading.gif";
+import Loading from "../../styles/images/loading.gif";
 
 type Props = {
   onClick?: () => void;
