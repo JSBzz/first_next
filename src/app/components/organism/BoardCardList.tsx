@@ -1,16 +1,18 @@
 "use client";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery, useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import BoardCard from "../molecule/BoardCard";
 import { PostGetPerPageRequest, PostGetRequest } from "@/app/_hook/PostRequest";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import noImage from "../../styles/images/noImage.jpg";
 import Link from "next/link";
+import CustomImage from "../molecule/CustomImage";
+import Loading from "../../styles/images/Loading.gif";
 
 export default function BoardCardList() {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
 
-  const { data, isLoading, status, fetchNextPage, isFetching } = useInfiniteQuery({
+  const { data, isLoading, status, fetchNextPage, isFetching } = useSuspenseInfiniteQuery({
     queryKey: ["post", page],
 
     queryFn: async ({ pageParam = 0 }) => {
@@ -40,7 +42,6 @@ export default function BoardCardList() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (status === "pending") return <>Loading</>;
   const imgSrcRegex = /<img[^>]+src="([^">]+)"/i;
 
   return (
@@ -55,25 +56,31 @@ export default function BoardCardList() {
         <option>10</option>
         <option>20</option>
       </select>
-      <Link href={"/post/write"}> Write </Link>
-      {data?.pages.map((posts: any) => {
-        return posts[1].map((post: any) => {
-          let thumbnail = noImage;
-          const img = post?.contents?.match(imgSrcRegex);
-          if (img != undefined) thumbnail = img[1];
-          return (
-            <div key={post?.id}>
-              <BoardCard
-                title={post?.title}
-                contents={post?.contents?.replace(/(<([^>]+)>)/gi, "")}
-                thumbnail={thumbnail}
-                id={post?.id}
-              />
-            </div>
-          );
-        });
-      })}
-      {isFetching && <div>Loading..</div>}
+      <Suspense fallback={<CustomImage.Loading />}>
+        <Link href={"/post/write"}> Write </Link>
+        {data?.pages.map((posts: any) => {
+          return posts[1].map((post: any) => {
+            let thumbnail = noImage;
+            const img = post?.contents?.match(imgSrcRegex);
+            if (img != undefined) thumbnail = img[1];
+            return (
+              <div key={post?.id}>
+                <BoardCard
+                  title={post?.title}
+                  contents={post?.contents?.replace(/(<([^>]+)>)/gi, "")}
+                  thumbnail={thumbnail}
+                  id={post?.id}
+                />
+              </div>
+            );
+          });
+        })}
+      </Suspense>
+      {isFetching && (
+        <div className="flex m-auto justify-center">
+          <CustomImage src={Loading} />
+        </div>
+      )}
       {data?.pages[data?.pages.length - 1][1].length == 0 && (
         <div className="mb-2 font-bold text-center">End Of Post</div>
       )}

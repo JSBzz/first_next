@@ -4,11 +4,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-[calc(100vh-64px)] ">
       <div>
-        <div className="fixed right-20 z-50 mt-20 bg-white">
-          <Chat />
-        </div>
-
-        <div className="absolute left-[20%] mt-12 z-0">
+        <div className="flex justify-center mt-12 z-0">
           <BoardCardList />
         </div>
       </div>

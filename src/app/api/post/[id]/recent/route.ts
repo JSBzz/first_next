@@ -10,6 +10,7 @@ export async function GET(request: NextRequest, { params: { id } }: Params) {
     const previousPost = await prisma.post.findFirst({
       where: { id: { lt: Number(id) } },
       take: 1,
+      orderBy: { id: "desc" },
     });
     const nowPost = await prisma.post.findFirst({
       where: { id: Number(id) },

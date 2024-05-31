@@ -11,9 +11,11 @@ export function CommentInput({ postId }: { postId: number }) {
 
   const session = useSession();
   const [text, setText] = useState("");
+  console.log("text: ", text);
   const { mutate } = useMutation({
     mutationKey: ["comment", postId, session.data?.user?.id ?? 0, text],
-    mutationFn: () => CommentPostRequest(postId, text, session.data?.user.id ?? 0),
+    mutationFn: () =>
+      CommentPostRequest(postId, text.replace("\n", "<br/>"), session.data?.user.id ?? 0),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comment", postId] });
       setText("");

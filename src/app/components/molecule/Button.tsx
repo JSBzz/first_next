@@ -76,12 +76,12 @@ function CallDefaultModalButton({ className = "", children }: Props) {
 function CallSignUpModalButton({ children = "Sign Up" }: Props) {
   const [showModal, setShowModal] = useState(false);
   return (
-    <div>
+    <span>
       <Button.Toggle setStatus={setShowModal} status={showModal}>
         {children}
       </Button.Toggle>
       <Modal.SignUp showModal={showModal} setShowModal={setShowModal} />
-    </div>
+    </span>
   );
 }
 const Button = Object.assign(DefaultButton, {

@@ -5,6 +5,7 @@ import { SessionContext, SessionProvider } from "next-auth/react";
 import AuthSession from "./_lib/next-auth/NextAuthSession";
 import { Fragment } from "react";
 import Header from "./components/organism/Header";
+import { RightNav } from "./components/organism/RightNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <html lang="ko">
           <body className={inter.className}>
             <Header />
+            <RightNav />
             {children}
           </body>
         </html>

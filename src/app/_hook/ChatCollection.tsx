@@ -35,7 +35,7 @@ const ChatCollection = ({ scrollRef }: any) => {
 
   return (
     <div className="bg-white z-30">
-      {chatData.map((chat, index) => (
+      {chatData?.map((chat, index) => (
         <p className="ml-2" key={index}>
           <span className="font-bold">{chat.nickname}</span> : {chat.text}
         </p>
