@@ -44,18 +44,18 @@ function ToggleButton({ children, status, setStatus }: ToggleProps) {
 
 function AuthenticationButton() {
   const { data: session } = useSession();
-  const userImage = session?.user?.picture;
+  const userImage = session?.user?.image;
 
   return (
     <>
       {session ? (
-        <ButtonFrame onClick={() => signOut()}>
-          <CustomImage.User src={userImage} type="small" />
-        </ButtonFrame>
+        <Button onClick={() => signOut()}>
+          <span className="font-bold text-2xl">Sign Out</span>
+        </Button>
       ) : (
-        <ButtonFrame onClick={() => signIn()}>
-          <Image src={loginImage} alt="image" width={100} height={100}></Image>
-        </ButtonFrame>
+        <Button onClick={() => signIn()}>
+          <span className="font-bold text-2xl">Sign In</span>
+        </Button>
       )}
     </>
   );

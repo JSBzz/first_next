@@ -118,7 +118,7 @@ export default function Game2048() {
           return blockList.map((block: number, colIndex: number) => (
             <span
               key={`${rowIndex}-${colIndex}`}
-              className={`border border-black w-11 h-11 flex items-center justify-center font-bold font drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`}
+              className={`border border-black w-12 h-11 flex items-center justify-center font-bold font drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`}
               style={{ backgroundColor: colorMap[block as ColorKey] }}
             >
               {block}

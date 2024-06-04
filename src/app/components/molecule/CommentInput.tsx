@@ -11,7 +11,6 @@ export function CommentInput({ postId }: { postId: number }) {
 
   const session = useSession();
   const [text, setText] = useState("");
-  console.log("text: ", text);
   const { mutate } = useMutation({
     mutationKey: ["comment", postId, session.data?.user?.id ?? 0, text],
     mutationFn: () =>

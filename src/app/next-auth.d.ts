@@ -7,7 +7,7 @@ declare module "next-auth" {
       nickname: string;
       email: string;
       accessToken: string;
-      picture: string;
+      image: string;
     };
   }
 }

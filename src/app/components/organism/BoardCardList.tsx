@@ -10,7 +10,7 @@ import Loading from "../../styles/images/loading.gif";
 
 export default function BoardCardList() {
   const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(5);
 
   const { data, isLoading, status, fetchNextPage, isFetching } = useSuspenseInfiniteQuery({
     queryKey: ["post", page],
@@ -44,19 +44,12 @@ export default function BoardCardList() {
   const imgSrcRegex = /<img[^>]+src="([^">]+)"/i;
 
   return (
-    <div>
-      <select
-        defaultValue={10}
-        onChange={(e) => {
-          setLimit(Number(e.target.value));
-        }}
-      >
-        <option>5</option>
-        <option>10</option>
-        <option>20</option>
-      </select>
-      <Suspense fallback={<CustomImage.Loading />}>
-        <Link href={"/post/write"}> Write </Link>
+    <Suspense fallback={<CustomImage.Loading />}>
+      <div>
+        <div className="float-right border border-gray-400 bg-gray-200 rounded-md m-2 p-1 hover:bg-gray-400">
+          <Link href={"/post/write"}> Write-Post </Link>
+        </div>
+        <br />
         {data?.pages.map((posts: any) => {
           return posts[1].map((post: any) => {
             let thumbnail = noImage;
@@ -80,10 +73,10 @@ export default function BoardCardList() {
             <CustomImage src={Loading} />
           </div>
         )}
-      </Suspense>
-      {data?.pages[data?.pages.length - 1][1].length == 0 && (
-        <div className="mb-2 font-bold text-center">End Of Post</div>
-      )}
-    </div>
+        {data?.pages[data?.pages.length - 1][1].length == 0 && (
+          <div className="mb-2 font-bold text-center">End Of Post</div>
+        )}
+      </div>
+    </Suspense>
   );
 }

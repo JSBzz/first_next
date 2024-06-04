@@ -12,8 +12,8 @@ export const TipTapMenu = ({
 }) => {
   if (!editor) return null;
   return (
-    <div className="flex mt-2 mb-2 border">
-      <form onSubmit={() => {}}>
+    <div className="mt-2 mb-2">
+      <form onSubmit={() => {}} className="flex">
         <MdFormatBold
           size={20}
           cursor={"pointer"}
@@ -40,7 +40,7 @@ export const TipTapMenu = ({
             size={20}
             cursor={"pointer"}
             style={{ color: editor.isActive("bold") ? "orange" : "black" }}
-          ></MdUploadFile>
+          />
         </label>
       </form>
     </div>
