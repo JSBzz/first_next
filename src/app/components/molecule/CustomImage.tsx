@@ -35,7 +35,7 @@ function UserImage({ src, type }: any) {
     );
   } else if (type == "text") {
     return (
-      <span className="rounded-full overflow-hidden justify-center h-8 w-8 mt-auto bg-gray-200">
+      <span className="rounded-full overflow-hidden justify-center h-8 w-8 m-auto bg-gray-200">
         <CustomImage className={"h-full w-full"} src={src} height={40} width={40} />
       </span>
     );

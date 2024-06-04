@@ -54,7 +54,7 @@ function AuthenticationButton() {
         </ButtonFrame>
       ) : (
         <ButtonFrame onClick={() => signIn()}>
-          <Image src={loginImage} alt="image" width={50} height={100}></Image>
+          <Image src={loginImage} alt="image" width={100} height={100}></Image>
         </ButtonFrame>
       )}
     </>

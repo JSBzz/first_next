@@ -1,5 +1,6 @@
 import CustomImage from "../molecule/CustomImage";
 import { Chat } from "./Chat";
+import Game2048 from "./Game2048";
 
 export function RightNav() {
   return (
@@ -16,8 +17,12 @@ export function RightNav() {
           <button>search</button>
         </form>
       </div>
-      <div className="bottom-12">
-        <Chat />
+      <div className="absolute bottom-0">
+        <Game2048 />
+
+        <div className="mt-1">
+          <Chat />
+        </div>
       </div>
     </div>
   );

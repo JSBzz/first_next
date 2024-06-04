@@ -21,7 +21,8 @@ export function Chat() {
   if (!mounted) return <></>;
   return (
     <div className="border border-black rounded-md overflow-hidden bg-white z-10">
-      <div ref={scrollRef} className=" overflow-y-scroll min-h-44 max-h-44 max-w-56">
+      <div className="bg-slate-200 text-center">CHAT</div>
+      <div ref={scrollRef} className=" overflow-y-scroll max-w-56 max-h-28">
         <ChatCollection scrollRef={scrollRef} />
       </div>
       <div>

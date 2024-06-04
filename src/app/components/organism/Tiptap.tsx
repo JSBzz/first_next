@@ -10,9 +10,11 @@ import { useState } from "react";
 import { uploadHandler } from "@/app/_utils/UploadHandler";
 import { PostPostRequest } from "@/app/_hook/PostRequest";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Tiptap = () => {
   const session = useSession();
+  const router = useRouter();
   console.log("session: ", session.data?.user.id);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<{ base64: any; file: any }[]>([]);
@@ -45,6 +47,8 @@ const Tiptap = () => {
             title: title,
             contents: uploadPostHtml,
             userId: session.data?.user.id!,
+          }).then((response) => {
+            router.push(`/post/${response.id}`);
           });
         }}
       >

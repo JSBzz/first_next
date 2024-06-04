@@ -27,7 +27,6 @@ export default function BoardCardList() {
 
     initialPageParam: 0,
   });
-  console.log("data: ", data);
 
   useEffect(() => {
     function handleScroll() {
@@ -70,17 +69,18 @@ export default function BoardCardList() {
                   contents={post?.contents?.replace(/(<([^>]+)>)/gi, "")}
                   thumbnail={thumbnail}
                   id={post?.id}
+                  created_at={post?.created_at}
                 />
               </div>
             );
           });
         })}
+        {isFetching && (
+          <div className="flex m-auto justify-center">
+            <CustomImage src={Loading} />
+          </div>
+        )}
       </Suspense>
-      {isFetching && (
-        <div className="flex m-auto justify-center">
-          <CustomImage src={Loading} />
-        </div>
-      )}
       {data?.pages[data?.pages.length - 1][1].length == 0 && (
         <div className="mb-2 font-bold text-center">End Of Post</div>
       )}

@@ -6,25 +6,32 @@ export default function BoardCard({
   contents,
   thumbnail,
   id,
+  created_at,
 }: {
   title: string;
   contents: string;
   thumbnail: any;
   id: number;
+  created_at: any;
 }) {
   return (
     <Link href={`/post/${id}`}>
       <div className="grid grid-cols-[20%_80%] min-w-[100vh] max-w-[100vh] w-full border border-gray-400 mb-3 rounded-xl hover:bg-gray-100 min-h-44 max-h-44 overflow-hidden">
-        <div className="w-min-56 min-h-56 max-h-56  bg-slate-200 relative block">
+        <div className="w-min-[100%] min-h-[100%]  bg-slate-200 relative flex">
           <CustomImage src={thumbnail} alt={title} type="fill" />
         </div>
-        <div className="grid grid-rows-[23%_77%] border-gray-400 border-l p-1">
-          <span className="font-bold text-3xl border-b border-gray-400">
-            <h1>{title}</h1>
-          </span>
-          <span className="mt-2">
-            {contents.length > 100 ? contents.substr(0, 200) + "..." : contents}
-          </span>
+        <div className="border-gray-400 border-l p-1">
+          <div className="w-full border-b border-gray-300 flex">
+            <span className="font-bold text-3xl">
+              <h1>{title}</h1>
+            </span>
+            <div className="text-gray-400 w-full text-right">{created_at}</div>
+          </div>
+          <div>
+            <span className="mt-2">
+              {contents.length > 100 ? contents.substr(0, 200) + "..." : contents}
+            </span>
+          </div>
         </div>
       </div>
     </Link>
