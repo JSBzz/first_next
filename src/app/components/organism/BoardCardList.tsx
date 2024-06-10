@@ -10,6 +10,7 @@ import Loading from "../../styles/images/loading.gif";
 
 export default function BoardCardList() {
   const [page, setPage] = useState(0);
+  const [mount, setMount] = useState(false);
   const [limit, setLimit] = useState(5);
 
   const { data, isLoading, status, fetchNextPage, isFetching } = useSuspenseInfiniteQuery({
@@ -20,15 +21,19 @@ export default function BoardCardList() {
       return response;
     },
     getNextPageParam: (lastPages, pages) => {
-      const totalPage = Math.ceil(lastPages[0] / limit);
-      const lastId = lastPages[1][lastPages[1].length - 1]?.id;
-      return page < totalPage ? lastId : undefined;
+      console.log("lastPages: ", lastPages);
+      if (lastPages?.length > 0) {
+        const totalPage = Math.ceil(lastPages[0] / limit);
+        const lastId = lastPages[1][lastPages[1].length - 1]?.id;
+        return page < totalPage ? lastId : undefined;
+      }
     },
 
     initialPageParam: 0,
   });
 
   useEffect(() => {
+    setMount(true);
     function handleScroll() {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
       if (scrollTop + clientHeight + 10 >= scrollHeight) {
@@ -43,6 +48,7 @@ export default function BoardCardList() {
 
   const imgSrcRegex = /<img[^>]+src="([^">]+)"/i;
 
+  if (!mount) return <></>;
   return (
     <Suspense fallback={<CustomImage.Loading />}>
       <div>
