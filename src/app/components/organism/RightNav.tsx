@@ -3,8 +3,13 @@ import { Chat } from "./Chat";
 import Game2048 from "./Game2048";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/next-auth/auth";
+import MobileDetect from "mobile-detect";
+import { isMobile } from "react-device-detect";
 
 export async function RightNav() {
+  if (isMobile) {
+    return <></>;
+  }
   const session = await getServerSession(authOptions);
   return (
     <div className="fixed right-0 top-0 h-screen bg-gray-100 min-w-56 max-w-56">
