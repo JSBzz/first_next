@@ -20,15 +20,12 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials, req) {
-        const fetchData: Response = await fetch(
-          `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/member/login`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: credentials?.email!,
-            }),
-          }
-        );
+        const fetchData: Response = await fetch(`${process.env.NEXTAUTH_URL}/api/member/login`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: credentials?.email!,
+          }),
+        });
 
         const user = await fetchData?.json();
         const isPasswordCompare = await bcrypt.compare(credentials?.password, user.password);

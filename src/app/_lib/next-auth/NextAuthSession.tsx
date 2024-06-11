@@ -9,7 +9,7 @@ type Props = {
 const queryClient = new QueryClient();
 export default function AuthSession({ children }: Props) {
   return (
-    <SessionProvider basePath={process.env.NEXT_PUBLIC_NEXTAUTH_URL}>
+    <SessionProvider>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </SessionProvider>
   );
