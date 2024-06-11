@@ -37,20 +37,22 @@ const initFiled = [
   [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 ];
 
-export default function Test() {
+export default function GameSnake({ gameStatus, setGameStatus, gameFieldRef }: any) {
   const [playFiled, setPlayField] = useState<number[][]>(initFiled);
   const [inputDirection, setInputDirection] = useState("RIGHT");
   const [food, setFood] = useState({ exist: false, position: { x: 0, y: 0 } });
   const directionRef = useRef<"UP" | "DOWN" | "RIGHT" | "LEFT">("RIGHT");
-  const [snake, setSnake] = useState(new LinkedList({ x: 5, y: 5 }));
+  const [snake, setSnake] = useState(new LinkedList({ x: 8, y: 6 }));
   const snakeRef = useRef(snake.getAll());
   const [time, setTime] = useState(0);
-  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
-    if (!isGameOver) {
+    if (gameStatus.gameOver) {
+      setSnake(new LinkedList({ x: 5, y: 5 }));
+    }
+    if (!gameStatus.gameOver && gameStatus.start) {
       const timer = setTimeout(() => {
-        if (!isGameOver) {
+        if (!gameStatus.gameOver && gameStatus.start) {
           setInputDirection(directionRef.current);
           const copyFiled = initFiled.map((data: number[]) => [...data]);
           const snakeHeadPos = snake.getHead().data;
@@ -58,7 +60,7 @@ export default function Test() {
           const nextData = getNextObject(direction, snakeHeadPos, playFiled);
 
           if (nextData.object == SnakeCode.WALL || nextData.object == SnakeCode.SNAKE) {
-            setIsGameOver(true);
+            setGameStatus({ ...gameStatus, gameOver: true });
           } else if (nextData.object == SnakeCode.FOOD) {
             snake.move(direction);
             snake.insertTail();
@@ -87,70 +89,64 @@ export default function Test() {
 
       return () => clearTimeout(timer);
     }
-  }, [time, isGameOver]);
+  }, [time, gameStatus.gameOver, gameStatus.start]);
+
   return (
-    <div>
-      {isGameOver && "GAME OVER"}
-      <div>
-        {isGameOver && (
-          <Button
-            onClick={() => {
-              setIsGameOver(false);
-              setSnake(new LinkedList({ x: 5, y: 5 }));
-            }}
-          >
-            Retry?
-          </Button>
-        )}
-      </div>
+    <div className="relative h-[207px] w-[224px] mt-0 mx-auto">
       <div
-        className="mt-11 "
         tabIndex={-1}
+        ref={gameFieldRef}
         onKeyDown={(e) => {
+          e.preventDefault();
           if (e.key == "ArrowRight" && inputDirection != "LEFT") directionRef.current = "RIGHT";
           else if (e.key == "ArrowLeft" && inputDirection != "RIGHT") directionRef.current = "LEFT";
           else if (e.key == "ArrowDown" && inputDirection != "UP") directionRef.current = "DOWN";
           else if (e.key == "ArrowUp" && inputDirection != "DOWN") directionRef.current = "UP";
         }}
+        onBlur={() => {
+          if (!gameStatus.gameOver) {
+            setGameStatus({ ...gameStatus, start: false });
+          }
+        }}
       >
         {playFiled.map((blockList, index) => {
           return (
-            <div key={`${index}-row`} className="max-h-4">
+            <div key={`${index}-row`} className="max-h-[13.8px] flex">
               {blockList.map((block, key) => {
                 const degree = rotateDegree[directionRef.current];
                 switch (block) {
                   case 4:
                     return (
                       <div
-                        className={`relative bg-green-600 inline-block w-4 h-4 border border-gray-400 rounded-t-full ${degree}`}
+                        className={`relative bg-green-600 inline-block w-[15.9px] h-[13.8px] border border-gray-400 rounded-t-full ${degree}`}
                       ></div>
                     );
                   case 3:
                     return (
                       <span
                         key={`${index}-${key}-col`}
-                        className="bg-yellow-400 inline-block m-[-2] w-4 h-4"
+                        className="bg-yellow-400 inline-block  w-[15.9px] h-[13.8px]"
                       ></span>
                     );
                   case 2:
                     return (
                       <span
                         key={`${index}-${key}-col`}
-                        className="bg-slate-900 inline-block m-[-2] w-4 h-4"
+                        className="bg-slate-900 inline-block  w-[15.9px] h-[13.8px]"
                       ></span>
                     );
                   case 1:
                     return (
                       <span
                         key={`${index}-${key}-col`}
-                        className="bg-green-600 inline-block m-[-2] w-4 h-4 border border-gray-400"
+                        className="bg-green-600 inline-block  w-[15.9px] h-[13.8px] border border-gray-400"
                       ></span>
                     );
                   case 0:
                     return (
                       <span
                         key={`${index}-${key}-col`}
-                        className="bg-teal-100 inline-block m-[-2] w-4 h-4 border border-gray-400"
+                        className="bg-teal-100 inline-block  w-[15.9px] h-[13.8px] border border-gray-400"
                       ></span>
                     );
                 }
@@ -161,5 +157,6 @@ export default function Test() {
         })}
       </div>
     </div>
+    // </div>
   );
 }

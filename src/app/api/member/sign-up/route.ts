@@ -1,9 +1,7 @@
 import CommonResponse from "@/app/_model/CommonResponse";
 import BadRequestError from "@/app/_utils/BadRequestError";
-import JWT from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { uploadHandler } from "@/app/_utils/UploadHandler";
 const bcrypt = require("bcrypt");
 
 const prisma = new PrismaClient();

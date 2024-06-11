@@ -17,18 +17,10 @@ const initGame: any = () => {
   return emptyGame;
 };
 
-export default function Game2048() {
+export default function Game2048({ gameStatus, setGameStatus, gameFieldRef }: any) {
   const [mount, setMount] = useState(false);
-  const [isStart, setIsStart] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
   const [isChange, setIsChange] = useState(false);
-  const divRef = useRef<any>(null);
   const [game, setGame] = useState(initGame());
-  useEffect(() => {
-    if (isStart) {
-      divRef.current.focus();
-    }
-  }, [isStart]);
 
   useEffect(() => {
     if (mount) {
@@ -45,44 +37,20 @@ export default function Game2048() {
       game[toFillBlockIndex.index][toFillBlockIndex.blockIndex] = 2;
       setGame([...game]);
       if (emptyBlockList.length == 1) {
-        setGameOver(true);
+        setGameStatus({ ...gameStatus, gameOver: true });
       }
     } else {
       setMount(true);
     }
   }, [isChange]);
-  if (!mount) return <></>;
 
   return (
-    <div className="bg-gray-200  h-[269px] w-[224px] rounded-md border border-gray-400">
-      <div className=" bg-gray-300 text-center font-bold bold h-[25px]">2048</div>
+    <div>
       <div
-        className="bg-yellow-200 absolute h-[207px] w-[224px] z-10 opacity-90 text-center content-center"
-        onFocus={() => {
-          setIsStart(true);
-        }}
-        hidden={isStart}
-        tabIndex={-1}
-      >
-        <span className="font-bold text-2xl">Press To Start</span>
-      </div>
-      <div
-        className="bg-yellow-200 absolute h-[207px] w-[224px] z-10 opacity-90 text-center content-center"
-        onFocus={() => {
-          setGameOver(false);
-          setGame(initGame());
-        }}
-        hidden={!gameOver}
-        tabIndex={-1}
-      >
-        <span className="font-bold text-2xl">Game Over</span>
-      </div>
-      <div
-        ref={divRef}
+        ref={gameFieldRef}
         onBlur={() => {
-          setIsStart(false);
+          setGameStatus({ ...gameStatus, start: false });
         }}
-        onClick={() => {}}
         onKeyDown={(e) => {
           e.preventDefault();
           let copyGame = game.map((data: number[]) => [...data]);
@@ -125,17 +93,6 @@ export default function Game2048() {
             </span>
           ));
         })}
-      </div>
-      <div className="h-[30px] flex mt-1">
-        ← → ↑ ↓
-        <button
-          className="bg-red-300 rounded-md border hover:bg-red-400 p-1"
-          onClick={() => {
-            setGame(initGame());
-          }}
-        >
-          reset
-        </button>
       </div>
     </div>
   );

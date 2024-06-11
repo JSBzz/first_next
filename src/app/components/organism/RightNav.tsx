@@ -1,31 +1,26 @@
-import CustomImage from "../molecule/CustomImage";
 import { Chat } from "./Chat";
-import Game2048 from "./Game2048";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/next-auth/auth";
-import MobileDetect from "mobile-detect";
-import { isMobile } from "react-device-detect";
+import { Game } from "./Game";
+import Image from "next/image";
 
 export async function RightNav() {
-  if (isMobile) {
-    return <></>;
-  }
   const session = await getServerSession(authOptions);
   return (
-    <div className="fixed right-0 top-0 h-screen bg-gray-100 min-w-56 max-w-56">
-      <div className="mt-2">
-        <CustomImage.User src={session?.user?.image} />
+    <div className="fixed right-0 top-0 h-screen m-auto bg-gray-100 w-56 hidden sm:block ">
+      <div className="relative w-1/6 pt-[16.66%] bg-gray-200">
+        <div className="absolute top-0 left-0 w-full h-full items-center">
+          {
+            <Image
+              src={session?.user?.image!}
+              alt="UserProfile"
+              className="m-auto rounded-full"
+              fill
+            />
+          }
+        </div>
       </div>
-      {/* <div className="">
-        <form className="w-fit flex">
-          <select>
-            <option>TEST</option>
-          </select>
-          <input type="text" />
-          <button>search</button>
-        </form>
-      </div> */}
-      <div className="h-full ">
+      <div className="h-full h-">
         <div className="bg-slate-400 h-[31%] overflow-auto p-2 mt-2">
           <div>sadas</div>
           <div>sadas</div>
@@ -51,10 +46,12 @@ export async function RightNav() {
           <div>sadas</div>
           <div>sadas</div> */}
         </div>
-        <div className="bottom-0">
-          <Game2048 />
-          <div className="mt-1">
-            <Chat />
+        <div>
+          <div>
+            <Game />
+            <div className="mt-1">
+              <Chat />
+            </div>
           </div>
         </div>
       </div>

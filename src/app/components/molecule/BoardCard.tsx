@@ -16,7 +16,7 @@ export default function BoardCard({
 }) {
   return (
     <Link href={`/post/${id}`}>
-      <div className="grid grid-cols-[20%_80%] min-w-[100vh] max-w-[100vh] w-full border border-gray-400 mb-3 rounded-xl hover:bg-gray-100 min-h-44 max-h-44 overflow-hidden">
+      <div className="grid grid-cols-[20%_80%] w-full border border-gray-400 mb-3 rounded-xl hover:bg-gray-100 overflow-hidden min-h-44">
         <div className="w-min-[100%] min-h-[100%]  bg-slate-200 relative flex">
           <CustomImage src={thumbnail} alt={title} type="fill" />
         </div>

@@ -73,8 +73,8 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
           }
         }}
       >
-        <div className=" h-fit w-fit mt-14 mr-4 ml-4 z-50 justify-center m-auto">
-          <div className="m-auto">
+        <div className="h-full w-full mt-14 z-50 flex flex-col items-center justify-center">
+          <div className="w-full max-w-md p-4">
             <Input.Label id="email" labelName="email" />
             <span className="text-red-500">
               {errorMessage.type == "email" && errorMessage.message}
@@ -88,14 +88,14 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
               {errorMessage.type == "password" && errorMessage.message}
             </span>
             <Input.Label id="passwordCheck" labelName="passwordCheck" type="password" />
+            <CustomImage.User className="mt-4 justify-center" src={image.imageUrl} />
+            <div className="flex items-center justify-center mt-4">
+              <Input.Image setImage={setImage} />
+            </div>
+            <div className="mt-2 justify-center ">
+              <Button className="bg-blue-100 p-2 rounded-xl">Sign Up</Button>
+            </div>
           </div>
-        </div>
-        <CustomImage.User src={image.imageUrl} />
-        <div className="mt-4 justify-center flex">
-          <Input.Image setImage={setImage} />
-        </div>
-        <div className="mt-2 justify-center flex ">
-          <Button className="bg-blue-100 p-2 rounded-xl">Sign Up</Button>
         </div>
       </form>
     </DefaultModal>
