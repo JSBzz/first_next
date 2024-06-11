@@ -55,7 +55,7 @@ const Tiptap = () => {
               contents: uploadPostHtml,
               userId: session.data?.user.id!,
             }).then((response) => {
-              router.push(`/post/${response.id}`);
+              router.push(`/post/${response?.id}`);
             });
           }
         }}
