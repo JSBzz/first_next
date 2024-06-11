@@ -23,7 +23,7 @@ export function CommentInput({ postId }: { postId: number }) {
   return (
     <div
       className={
-        "min-w-[60%] m-auto justify-center flex max-w-[60%] h-20 rounded-md overflow-hidden border border-gray-500"
+        "min-w-[300px] m-auto justify-center flex w-2/4 h-20 rounded-md overflow-hidden border border-gray-500"
       }
     >
       <textarea

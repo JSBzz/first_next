@@ -50,7 +50,7 @@ export default function BoardCardList() {
   if (!mount) return <></>;
   return (
     <Suspense fallback={<CustomImage.Loading />}>
-      <div className="w-2/4">
+      <div className="w-2/4 min-w-[300px]">
         <div className="float-right border border-gray-400 bg-gray-200 rounded-md m-2 p-1 hover:bg-gray-400">
           <Link href={"/post/write"}> Write-Post </Link>
         </div>

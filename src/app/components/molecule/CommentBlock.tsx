@@ -3,7 +3,7 @@ import CustomImage from "./CustomImage";
 export function CommentBlock({ comment }: any) {
   console.log("comment: ", comment);
   return (
-    <div className="min-w-[60%] m-auto justify-center max-w-[60%] min-h-20 border border-gray-400 mt-4 grid-cols-2 rounded-md p-1">
+    <div className="min-w-[300px] m-auto justify-center w-2/4 min-h-20 border border-gray-400 mt-4 grid-cols-2 rounded-md p-1">
       <div className="border-gray-400 border-b ml-1 mr-1">
         <div className="flex">
           <CustomImage.User src={comment?.user?.image} type={"text"} />

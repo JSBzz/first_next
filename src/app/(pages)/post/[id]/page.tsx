@@ -1,7 +1,5 @@
 "use client";
 import { PostDetailGetRequest } from "@/app/_hook/PostRequest";
-import { CommentBlock } from "@/app/components/molecule/CommentBlock";
-import { CommentInput } from "@/app/components/molecule/CommentInput";
 import CustomImage from "@/app/components/molecule/CustomImage";
 import PostBody from "@/app/components/molecule/PostBody";
 import PostTitle from "@/app/components/molecule/PostTitle";
@@ -16,17 +14,21 @@ export default function PostDetail({ params: { id } }: { params: { id: number } 
     queryFn: () => PostDetailGetRequest(id),
   });
   return (
-    <>
-      <Suspense fallback={<CustomImage.Loading />}>
-        <PostTitle
-          title={data?.title}
-          writer={data?.user?.nickname}
-          registDate={data?.created_at}
-        />
-        <PostBody contents={data?.contents} userInfo={data?.user} />;
-        <Comment postId={id} />
-        <RecentPost postId={id} />
-      </Suspense>
-    </>
+    <div className="w-full">
+      <div className="min-w-[300px] w-3/5 items-center justify-center object-center text-center m-auto mt-8">
+        <Suspense fallback={<CustomImage.Loading />}>
+          <PostTitle
+            title={data?.title}
+            writer={data?.user?.nickname}
+            registDate={data?.created_at}
+          />
+          <PostBody contents={data?.contents} userInfo={data?.user} />
+          <div className="mt-4">
+            <Comment postId={id} />
+          </div>
+          <RecentPost postId={id} />
+        </Suspense>
+      </div>
+    </div>
   );
 }
