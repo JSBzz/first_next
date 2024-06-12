@@ -39,6 +39,14 @@ function UserImage({ src, type }: any) {
         <CustomImage className={"h-full w-full"} src={src} height={40} width={40} />
       </span>
     );
+  } else if (type == "medium") {
+    return (
+      <div className="justify-center w-full flex max-h-24 max-w-24 m-auto">
+        <div className="rounded-full overflow-hidden justify-center h-24 w-24 bg-gray-50">
+          <CustomImage className={"h-full w-full"} src={src} height={100} width={100} />
+        </div>
+      </div>
+    );
   }
   return (
     <div className="justify-center w-full flex max-h-48 max-w-48 m-auto">

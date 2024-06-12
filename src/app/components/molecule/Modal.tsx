@@ -17,8 +17,8 @@ function DefaultModal({ children, showModal, setShowModal, title = "" }: Props) 
   if (!showModal) return <></>;
   return (
     <ModalFrame>
-      <div className="absolute h-11 w-full rounded-t-xl bg-slate-300">
-        <div className="mr-4 mt-2 ml-4 justify-center ">
+      <div className="h-11 w-full rounded-t-xl bg-slate-300">
+        <div className="mr-4 ml-4 justify-center ">
           <span className="float-left font-bold text-xl ">{title}</span>
           <span className="float-right">
             <Button.Toggle setStatus={setShowModal} status={showModal}>
@@ -73,8 +73,8 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
           }
         }}
       >
-        <div className="h-full w-full mt-14 z-50 flex flex-col items-center justify-center">
-          <div className="w-full max-w-md p-4">
+        <div className="h-full w-full z-50 flex flex-col items-center justify-center">
+          <div className="w-full max-w-md p-1 md:p-4">
             <Input.Label id="email" labelName="email" />
             <span className="text-red-500">
               {errorMessage.type == "email" && errorMessage.message}
@@ -88,7 +88,7 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
               {errorMessage.type == "password" && errorMessage.message}
             </span>
             <Input.Label id="passwordCheck" labelName="passwordCheck" type="password" />
-            <CustomImage.User className="mt-4 justify-center" src={image.imageUrl} />
+            <CustomImage.User className="mt-4 justify-center" src={image.imageUrl} type="medium" />
             <div className="flex items-center justify-center mt-4">
               <Input.Image setImage={setImage} />
             </div>

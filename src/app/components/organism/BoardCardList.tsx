@@ -54,9 +54,11 @@ export default function BoardCardList() {
   return (
     <Suspense fallback={<CustomImage.Loading />}>
       <div className="w-2/4 min-w-[300px]">
-        <div className="float-right border border-gray-400 bg-gray-200 rounded-md m-2 p-1 hover:bg-gray-400">
-          {session.data && <Link href={"/post/write"}> Write-Post </Link>}
-        </div>
+        {session.data && (
+          <div className="float-right border border-gray-400 bg-gray-200 rounded-md m-2 p-1 hover:bg-gray-400">
+            <Link href={"/post/write"}> Write-Post </Link>
+          </div>
+        )}
         <br />
         {data?.pages.map((posts: any) => {
           return posts[1].map((post: any) => {
