@@ -74,7 +74,7 @@ function SignUpModal({ children, showModal, setShowModal }: Props) {
         }}
       >
         <div className="h-full w-full z-50 flex flex-col items-center justify-center">
-          <div className="w-full max-w-md p-1 md:p-4">
+          <div className="w-full p-1 min-w-[80%] max-w-[80%] min-h-[80%] max-h-[80%] md:p-4">
             <Input.Label id="email" labelName="email" />
             <span className="text-red-500">
               {errorMessage.type == "email" && errorMessage.message}
