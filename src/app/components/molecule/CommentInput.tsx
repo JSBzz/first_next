@@ -38,7 +38,7 @@ export function CommentInput({ postId }: { postId: number }) {
         disabled={isGuest}
         placeholder={isGuest ? "로그인해야함" : ""}
       />
-      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border" disabled={true}>
+      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border" disabled={isGuest}>
         INPUT
       </ButtonFrame>
     </div>
