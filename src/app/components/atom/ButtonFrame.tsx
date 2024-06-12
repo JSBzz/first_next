@@ -4,10 +4,11 @@ type Props = {
   onClick?: () => void;
   children?: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 };
-function DefaultButtonFrame({ children, className, onClick }: Props) {
+function DefaultButtonFrame({ children, className, onClick, disabled = false }: Props) {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

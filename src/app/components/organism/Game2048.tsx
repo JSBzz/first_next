@@ -23,6 +23,12 @@ export default function Game2048({ gameStatus, setGameStatus, gameFieldRef }: an
   const [game, setGame] = useState(initGame());
 
   useEffect(() => {
+    gameStatus.initFunction = () => {
+      setGame(initGame());
+    };
+  }, []);
+
+  useEffect(() => {
     if (mount) {
       const emptyBlockList: { index: number; blockIndex: number }[] = [];
       game.forEach((blockList: number[], index: number) => {
@@ -38,6 +44,7 @@ export default function Game2048({ gameStatus, setGameStatus, gameFieldRef }: an
       setGame([...game]);
       if (emptyBlockList.length == 1) {
         setGameStatus({ ...gameStatus, gameOver: true });
+        setGame(initGame());
       }
     } else {
       setMount(true);

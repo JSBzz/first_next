@@ -38,9 +38,7 @@ export function GameFrame({ gameStatus, setGameStatus, gameFieldRef, children }:
         <div className="h-[30px] flex mt-1 object-center m-auto">
           <button
             className="bg-red-300 rounded-md border hover:bg-red-400 p-1"
-            // onClick={() => {
-            //   // setGame(initGame());
-            // }}
+            onClick={gameStatus.initFunction}
           >
             reset
           </button>

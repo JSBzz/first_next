@@ -8,7 +8,7 @@ import { CommentPostRequest } from "@/app/_hook/PostRequest";
 
 export function CommentInput({ postId }: { postId: number }) {
   const queryClient = useQueryClient();
-
+  let isGuest = true;
   const session = useSession();
   const [text, setText] = useState("");
   const { mutate } = useMutation({
@@ -20,6 +20,9 @@ export function CommentInput({ postId }: { postId: number }) {
       setText("");
     },
   });
+  if (session.data?.user) {
+    isGuest = false;
+  }
   return (
     <div
       className={
@@ -31,9 +34,11 @@ export function CommentInput({ postId }: { postId: number }) {
           setText(e.target.value);
         }}
         value={text}
-        className="max-w-[90%] w-full "
+        className={`max-w-[90%] w-full ${isGuest && "bg-slate-200"}`}
+        disabled={isGuest}
+        placeholder={isGuest ? "로그인해야함" : ""}
       />
-      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border">
+      <ButtonFrame onClick={mutate} className="min-w-[10%] bg-slate-300 border" disabled={true}>
         INPUT
       </ButtonFrame>
     </div>

@@ -12,7 +12,7 @@ export function Game() {
   });
   const gameFieldRef = useRef(null);
   useEffect(() => {
-    setGameStatus({ ...gameStatus, start: false, gameOver: false, initFunction: () => {} });
+    setGameStatus({ ...gameStatus, start: false, gameOver: false });
   }, [gameStatus.selectGame]);
 
   return (

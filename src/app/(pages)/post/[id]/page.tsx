@@ -15,7 +15,7 @@ export default function PostDetail({ params: { id } }: { params: { id: number } 
   });
   return (
     <div className="w-full">
-      <div className="min-w-[300px] w-3/5 items-center justify-center object-center text-center m-auto mt-8">
+      <div className="items-center justify-center object-center m-auto mt-8">
         <Suspense fallback={<CustomImage.Loading />}>
           <PostTitle
             title={data?.title}
